@@ -1,0 +1,15 @@
+# Lista de todas las functions
+deducible:
+  handler: src/deducible/app.handler
+  events:
+    - http:
+        path: /deducible
+        method: post
+        integration: lambda
+        cors:
+          ${file(config/serverless/http-cors.yml)}
+        request:
+          template:
+            application/json: ${file(config/serverless/request/deducible.vm)}
+        response:
+          ${file(config/serverless/http-response.yml)}

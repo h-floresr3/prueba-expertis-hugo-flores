@@ -1,0 +1,3 @@
+passThrough: NEVER
+template:
+  application/json: ${file(config/serverless/request.vm)}

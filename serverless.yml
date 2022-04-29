@@ -1,0 +1,52 @@
+service: ${self:custom.serviceName}
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage,'DESA'}
+  region: ${self:custom.regions.code.${opt:stage}}
+  timeout: 60
+  memorySize: 1024
+  versionFunctions: false
+  logRetentionInDays: 3
+  tracing:
+    lambda: true
+  tags: # Tags para  los lambdas
+    NAME:  ${self:custom.regions.abrev.${opt:stage}}COM${opt:stage}PRUEBA-EXPERTIS-HUGO-FLORES
+    ENTORNO: ${self:provider.stage}
+    PROYECTO: PRUEBA-EXPERTIS-HUGO-FLORES
+    RESPONSABLE: HUGO FLORES RODRIGUEZ
+
+  stackTags: # tags para CloudFormation
+    NAME:  ${self:custom.regions.abrev.${opt:stage}}COM${opt:stage}HUBCLIENTESV1
+    ENTORNO: ${self:provider.stage}
+    PROYECTO: ROYAL-BBVA
+    RESPONSABLE: HUGO FLORES RODRIGUEZ
+
+  environment:
+    REGION: ${self:provider.region}
+    STAGE: ${self:provider.stage}
+    LOG_LEVEL: 'INFO'
+custom:
+  reducer:
+      ignoreMissing: true
+
+  functionsFile: ${opt:functionsFile, 'cloud'}
+  
+  name: PRUEBA-EXPERTIS-HUGO-FLORES
+  serviceName: ${self:custom.name}-ACF-01
+
+  regions:
+    code: ${file(./config/serverless/common-custom-config.yaml):regions.code}
+    abrev: ${file(./config/serverless/common-custom-config.yaml):regions.abrev}
+plugins:
+  - serverless-plugin-reducer
+  - serverless-offline
+package:
+  individually: true
+  exclude:
+    - node_modules/**
+  include:
+    - node_modules/@rimac
+
+functions: ${file(config/serverless/functions.${self:custom.functionsFile}.yml)}
