@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --ext .js,.ts,.tsx -f codeframe --fix",
     "start": "serverless offline start --stage TEST --noTimeout --functionsFile local",
     "deploy": "sh .\\config\\shells\\deploy-script.sh",
-    "test": "jest --coverage",
+    "test": "jest",
     "test-coverage": "jest --coverage"
   },
   "repository": {
