@@ -1,0 +1,6 @@
+projectKey=prueba-expertis-hugo-flores
+serverUrl=http://172.29.113.232:10003
+serverVersion=8.9.2.46101
+dashboardUrl=http://172.29.113.232:10003/dashboard?id=prueba-expertis-hugo-flores
+ceTaskId=AYBzPuNO01ll3_NhaXq1
+ceTaskUrl=http://172.29.113.232:10003/api/ce/task?id=AYBzPuNO01ll3_NhaXq1

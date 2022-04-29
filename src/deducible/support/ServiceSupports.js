@@ -4,10 +4,22 @@ const {
   FORMATODEDUCIBLE, FORMATOCOPAGO, FORMATOMONEDA, FORMATOTALLER,
   FORMATOTIPO, FORMATODIGITO, MONEDAS, FORMATOMARCA, FORMATOTALLERES,
   FORMATOMARCA_TEXT, TIPOS
-} = require('./DomainConstans');
+} = require('./DomainConstants');
 
 
 module.exports = {
+
+  obtenerLineasValidas(lines) {
+    return lines.map((l, i) => {
+      if (this.validarTaller(l) && this.validarCopagoYMoneda(l)) {
+        return l;
+      }
+      if (this.validarTaller(l) && !this.validarCopagoYMoneda(l) && this.validarCopagoYMoneda(lines[i + 1])) {
+        return `${l} ${lines[i + 1]}`;
+      }
+      return null;
+    }).filter((l) => l !== null);
+  },
 
   validarCopagoYMoneda(l) {
     const regex = new RegExp(FORMATODEDUCIBLE);
@@ -20,6 +32,23 @@ module.exports = {
     const valor = regex.test(l);
     return valor;
   },
+
+  procesarLineas(lineasTalleres) {
+    return lineasTalleres.map((line) => {
+      const deducible = this.obtenerDeducible(line);
+      const copago = this.obtenerMonto(line);
+      const tipos = this.obtenerTipo(line);
+      const moneda = this.obtenerMoneda(line);
+      const marca = this.obtenerMarca(line);
+      const taller = this.obtenerTalleres(line);
+      return tipos.map((tipo) => {
+        return {
+          deducible, copago, moneda, tipo, marca, taller
+        };
+      });
+    }).reduce((x, y) => x.concat(y), []);
+  },
+
   obtenerDeducible(line) {
     return parseFloat(line.match(FORMATODEDUCIBLE)[0].match(FORMATODIGITO)[0], 10);
   },

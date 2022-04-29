@@ -4,7 +4,6 @@ module.exports.MONEDAS = {
   'S/.': 'PEN',
   US$: 'USD'
 };
-module.exports.COMIDIN = /\//g;
 // eslint-disable-next-line
 module.exports.MONEDAS_TEXT = `(${Object.keys(this.MONEDAS).join('|').replace(/\//g, '\\\/').replace(/\$/g, '\\$').replace(/\./g, '\\.')})`;
 // eslint-disable-next-line
@@ -53,17 +52,13 @@ module.exports.TALLERES = [
   'SEREINSA',
   'EUROMOTORS - AUDI ZENTRUM',
   'AUTOS AMERICANOS',
-  'AUTOS AMERICANOS',
   'GERMANIA AUTOMOTRIZ (SERVICIO ESPECIALIZADO)',
-  'AUTOS AMERICANOS',
   'AUTOMOTRIZ SAN BORJA (SERVICIO ESPECIALIZADO)',
-  'AUTOS AMERICANOS',
   'DERCO',
   'AMERICAN MOTORS',
   'MASS AUTOMOTRIZ',
   'AK - MIRAFLORES',
   'AUTO KOREA S.A.C.',
-  'MASS AUTOMOTRIZ',
   'DAIHATSU DEL PERU',
   'AUTO LAND',
   'MANASA',
@@ -79,7 +74,6 @@ module.exports.TALLERES = [
   'AUTOLAND',
   'MANASA',
   'AUTOS PEÑARANDA',
-  'AUTOS AMERICANOS',
   'SAN BLAS',
   'NISSAN MAQUINARIAS',
   'ALMACENES SANTA CLARA',
@@ -89,11 +83,9 @@ module.exports.TALLERES = [
   'NISSAN MAQUINARIAS',
   'ALTOS ANDES',
   'EUROMOTORS - EUROSPORT',
-  'AUTOS AMERICANOS',
   'EL AUTODROMO',
   'AUTOMOTRIZ LAVAGNA',
   'DERCO',
-  'MASS AUTOMOTRIZ',
   'MITSUI AUTOMOTRIZ',
   'PANA AUTOS',
   'PANATEC',
